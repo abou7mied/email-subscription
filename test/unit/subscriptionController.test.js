@@ -1,16 +1,17 @@
 require('reflect-metadata');
 const mongoose = require('mongoose');
-const { container, sendMailFn } = require('../common');
+const {
+  container, sendMailFn, connectMongo, clearDatabase,
+} = require('../common');
 const { TYPES } = require('../../src/common');
-const subscriptionModel = require('../../src/subscription/subscription');
 
 beforeAll(async () => {
-  await mongoose.connect('mongodb://127.0.0.1:27017/subscribers-test');
-  await subscriptionModel.remove();
+  await connectMongo();
+  await clearDatabase();
 });
 
 afterEach(async () => {
-  await subscriptionModel.remove();
+  await clearDatabase();
 });
 
 afterAll(() => {

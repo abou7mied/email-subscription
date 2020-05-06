@@ -1,18 +1,16 @@
 require('reflect-metadata');
-
 const request = require('supertest');
 const mongoose = require('mongoose');
-const { container } = require('../common');
+const { container, connectMongo, clearDatabase } = require('../common');
 const appFactory = require('../../src/app');
-const subscriptionModel = require('../../src/subscription/subscription');
 
 beforeAll(async () => {
-  await mongoose.connect('mongodb://127.0.0.1:27017/subscribers-test');
-  await subscriptionModel.remove();
+  await connectMongo();
+  await clearDatabase();
 });
 
 afterEach(async () => {
-  await subscriptionModel.remove();
+  await clearDatabase();
 });
 
 const app = appFactory(container)
