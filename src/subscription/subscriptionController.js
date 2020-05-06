@@ -1,5 +1,5 @@
 const inversify = require('inversify');
-const {TYPES} = require('../common');
+const { TYPES } = require('../common');
 
 class SubscriptionController {
   constructor(subscriptionDAL) {
@@ -11,7 +11,7 @@ class SubscriptionController {
     const subscription = await this.subscriptionDAL.createSubscription(email);
     return {
       subscription,
-    }
+    };
   }
 
   async checkEmail(email) {
@@ -22,7 +22,7 @@ class SubscriptionController {
     if (subscription) {
       response.subscription = subscription;
     }
-    return response
+    return response;
   }
 }
 

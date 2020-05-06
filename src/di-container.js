@@ -1,6 +1,6 @@
-const {Container} = require('inversify');
-const {TYPES} = require('./common');
-const {SubscriptionController, SubscriptionDAL} = require('./subscription');
+const { Container } = require('inversify');
+const { TYPES } = require('./common');
+const { SubscriptionController, SubscriptionDAL } = require('./subscription');
 const Database = require('./database');
 
 const container = new Container();

@@ -1,5 +1,5 @@
 const Router = require('@koa/router');
-const {subscriptionRouterFactory} = require('../subscription');
+const { subscriptionRouterFactory } = require('../subscription');
 
 function init(container) {
   const router = new Router();
@@ -16,7 +16,7 @@ function init(container) {
       ctx.body = {
         status: 'ok',
         ...ctx.body,
-      }
+      };
     } catch (err) {
       ctx.status = err.status || 500;
       // TODO: handle sensitive data

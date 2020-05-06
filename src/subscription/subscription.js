@@ -8,9 +8,9 @@ const subscriptionSchema = new Schema({
     required: true,
   },
   expireAt: {
-    type:Number,
+    type: Number,
     required: true,
-  }
+  },
 });
 
 subscriptionSchema.index({
