@@ -11,6 +11,8 @@ const subscriptionSchema = new Schema({
     type: Number,
     required: true,
   },
+}, {
+  timestamps: true,
 });
 
 subscriptionSchema.index({

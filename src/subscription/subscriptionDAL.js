@@ -1,11 +1,20 @@
 const inversify = require('inversify');
 const subscriptionModel = require('./subscription');
 
+function normalizeSubscription(subscription) {
+  return {
+    id: subscription._id,
+    email: subscription.email,
+    expireAt: subscription.expireAt,
+  };
+}
+
 class SubscriptionDAL {
   findSubscriptionByEmail(email) {
     return subscriptionModel.findOne({
       email,
-    });
+    })
+      .then((data) => data ? normalizeSubscription(data) : null);
   }
 
   createSubscription(email) {
@@ -16,7 +25,8 @@ class SubscriptionDAL {
     }, {
       upsert: true,
       new: true,
-    });
+    })
+      .then(normalizeSubscription);
   }
 }
 
