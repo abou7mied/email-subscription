@@ -4,8 +4,6 @@ const { container } = require('../../src/di-container');
 const { TYPES } = require('../../src/common');
 const subscriptionModel = require('../../src/subscription/subscription');
 
-const subscriptionController = container.get(TYPES.SubscriptionController);
-
 beforeAll(async () => {
   await mongoose.connect('mongodb://127.0.0.1:27017/subscribers-test');
   await subscriptionModel.remove();
@@ -19,18 +17,40 @@ afterAll(() => {
   return mongoose.disconnect();
 });
 
+const sendMailFn = jest
+  .fn()
+  .mockResolvedValue(true)
+  .mockName('sendMail');
+
+container.rebind(TYPES.Mailer)
+  .toConstantValue({
+    sendMail: sendMailFn,
+  });
+
+const subscriptionController = container.get(TYPES.SubscriptionController);
+
 describe('Subscription Controller', () => {
+  beforeEach(() => {
+    sendMailFn.mockClear();
+  });
+
   describe('Create subscription', () => {
-    it('Passes invalid email', () => {
+    it('Passing invalid email', () => {
       return expect(subscriptionController.subscribe('invalid-email-address'))
         .rejects
         .toThrow(/email/);
     });
 
-    it('Create valid email ', () => {
+    it('Passing valid email ', () => {
       return expect(subscriptionController.subscribe('email@example.com'))
         .resolves
         .toHaveProperty('subscription');
+    });
+
+    it('Should send an email ', async () => {
+      await subscriptionController.subscribe('email@example.com');
+      await expect(sendMailFn)
+        .toBeCalled();
     });
   });
 
