@@ -8,8 +8,10 @@ class Validation {
       const validate = ajv.compile(schema);
       const valid = validate(data);
       if (!valid) {
-        const error = validate.errors[0];
-        throw new Error(`${error.dataPath.replace('.', '')} ${error.message}`);
+        const err = validate.errors[0];
+        const error = new Error(`${err.dataPath.replace('.', '')} ${err.message}`);
+        error.status = 400;
+        throw error;
       }
     };
   }

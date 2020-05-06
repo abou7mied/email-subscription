@@ -2,7 +2,7 @@
 [![Build Status](https://travis-ci.org/abou7mied/email-subscription.svg?branch=master)](https://travis-ci.org/abou7mied/email-subscription)
 [![codecov.io](https://codecov.io/github/abou7mied/email-subscription/coverage.svg?branch=master)](https://codecov.io/github/abou7mied/email-subscription?branch=master)
 
-This is a sample project for email subscripton. 
+Backend for a sample email subscription project. 
 
 ## How to run
 First install the dependencies
@@ -24,7 +24,6 @@ EMAIL_FROM=no-reply@example.com
 
 Start the server
 ```
-npm run lint:fix
 npm start
 ```
 Testing
@@ -32,6 +31,14 @@ Testing
 npm test
 ```
 
-## API endpoints
-- **POST /api/subscribe** expects body field **email**
-- **GET /api/checkEmail** expects query field **email**
+## Built using
+- koa (HTTP framework)
+- Mongoose (ORM)
+- inversify (dependency injection)
+- ajv (data validation)
+- swagger (API documentation)
+- jest (Testing Framework)
+
+## API
+Check swagger documentation http://localhost:3000/swagger
+
