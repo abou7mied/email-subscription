@@ -31,3 +31,7 @@ Testing
 ```
 npm test
 ```
+
+## API endpoints
+- **POST /api/subscribe** expects body field **email**
+- **GET /api/checkEmail** expects query field **email**
