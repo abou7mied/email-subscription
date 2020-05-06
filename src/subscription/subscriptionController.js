@@ -40,8 +40,9 @@ class SubscriptionController {
   async checkEmail(email) {
     await this.validators.subscribe({ email });
     const subscription = await this.subscriptionDAL.findSubscriptionByEmail(email);
+    const subscribed = !!subscription && (subscription.expireAt > Date.now());
     const response = {
-      subscribed: !!subscription,
+      subscribed,
     };
     if (subscription) {
       response.subscription = subscription;
