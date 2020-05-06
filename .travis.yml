@@ -10,7 +10,7 @@ before_script:
   - pip install --user codecov
   - npm install
   - mongo subscribers-test --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
-  - echo 'MONGO_URL=mongodb://travis:pwd@127.0.0.1:27017/subscribers-test' >> .env.test
+  - echo 'MONGO_URL=mongodb://travis:pwd@localhost/subscribers-test' >> .env.test
 script:
   - npm run test
 after_success:
