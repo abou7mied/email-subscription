@@ -1,7 +1,7 @@
 require('reflect-metadata');
 require('dotenv').config();
 
-const { container } = require('./src/di-container');
+const { container } = require('./di-container');
 const { TYPES } = require('./src/common');
 const appFactory = require('./src/app');
 

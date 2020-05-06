@@ -1,6 +1,6 @@
 require('reflect-metadata');
 const mongoose = require('mongoose');
-const { container } = require('../../src/di-container');
+const { container, sendMailFn } = require('../common');
 const { TYPES } = require('../../src/common');
 const subscriptionModel = require('../../src/subscription/subscription');
 
@@ -16,16 +16,6 @@ afterEach(async () => {
 afterAll(() => {
   return mongoose.disconnect();
 });
-
-const sendMailFn = jest
-  .fn()
-  .mockResolvedValue(true)
-  .mockName('sendMail');
-
-container.rebind(TYPES.Mailer)
-  .toConstantValue({
-    sendMail: sendMailFn,
-  });
 
 const subscriptionController = container.get(TYPES.SubscriptionController);
 
