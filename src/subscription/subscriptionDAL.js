@@ -14,7 +14,12 @@ class SubscriptionDAL {
     return subscriptionModel.findOne({
       email,
     })
-      .then((data) => data ? normalizeSubscription(data) : null);
+      .then((data) => {
+        if (data) {
+          return normalizeSubscription(data);
+        }
+        return null;
+      });
   }
 
   createSubscription(email) {
