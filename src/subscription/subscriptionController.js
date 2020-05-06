@@ -1,5 +1,6 @@
 const inversify = require('inversify');
 const { TYPES } = require('../common');
+const emailFormatter = require('./emailFormatter');
 
 const subscribeSchema = {
   type: 'object',
@@ -16,8 +17,9 @@ const userDataSchemas = {
 
 
 class SubscriptionController {
-  constructor(subscriptionDAL, validation) {
+  constructor(subscriptionDAL, validation, mailer) {
     this.subscriptionDAL = subscriptionDAL;
+    this.mailer = mailer;
     this.validators = {
       subscribe: validation.buildValidator(userDataSchemas.subscribe),
     };
@@ -26,6 +28,10 @@ class SubscriptionController {
   async subscribe(email) {
     await this.validators.subscribe({ email });
     const subscription = await this.subscriptionDAL.createSubscription(email);
+    const emailObject = emailFormatter(email);
+    this.mailer
+      .sendMail(email, emailObject.subject, emailObject.text, emailObject.html)
+      .catch(console.error);
     return {
       subscription,
     };
@@ -47,5 +53,6 @@ class SubscriptionController {
 inversify.decorate(inversify.injectable(), SubscriptionController);
 inversify.decorate(inversify.inject(TYPES.SubscriptionDAL), SubscriptionController, 0);
 inversify.decorate(inversify.inject(TYPES.Validation), SubscriptionController, 1);
+inversify.decorate(inversify.inject(TYPES.Mailer), SubscriptionController, 2);
 
 module.exports = SubscriptionController;

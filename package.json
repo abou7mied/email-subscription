@@ -21,6 +21,7 @@
     "koa": "^2.11.0",
     "koa-body": "^4.1.1",
     "mongoose": "^5.9.12",
+    "nodemailer": "^6.4.6",
     "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {

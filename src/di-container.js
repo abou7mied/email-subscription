@@ -3,6 +3,7 @@ const { TYPES } = require('./common');
 const { SubscriptionController, SubscriptionDAL } = require('./subscription');
 const Validation = require('./utils/validation');
 const Database = require('./database');
+const Mailer = require('./email/mailer');
 
 const container = new Container();
 
@@ -20,6 +21,10 @@ container.bind(TYPES.SubscriptionController)
 
 container.bind(TYPES.Validation)
   .to(Validation)
+  .inSingletonScope();
+
+container.bind(TYPES.Mailer)
+  .to(Mailer)
   .inSingletonScope();
 
 module.exports = {
