@@ -24,7 +24,6 @@ class SubscriptionController {
   }
 
   async subscribe(email) {
-    // TODO: handle duplicates
     await this.validators.subscribe({ email });
     const subscription = await this.subscriptionDAL.createSubscription(email);
     return {
