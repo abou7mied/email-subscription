@@ -24,7 +24,7 @@
     "koa-body": "^4.1.1",
     "koa2-swagger-ui": "^3.0.0",
     "mongoose": "^5.9.12",
-    "nodemailer": "^6.4.6",
+    "nodemailer": "^6.4.16",
     "nodemon": "^2.0.3",
     "reflect-metadata": "^0.1.13",
     "supertest": "^4.0.2",
