@@ -16,7 +16,7 @@
   "dependencies": {
     "@koa/cors": "^3.0.0",
     "@koa/router": "^8.0.8",
-    "ajv": "^6.12.2",
+    "ajv": "^6.12.3",
     "dotenv": "^8.2.0",
     "inversify": "^5.0.1",
     "jest": "^26.0.1",
